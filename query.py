@@ -1,4 +1,5 @@
 import os
+import re
 
 from utils import *
 from api import *
@@ -34,17 +35,21 @@ async def search_query(data, query, content="data"):
     return result
 
 
-async def search_set(data, prime):
+async def search_set(data, filtering):
     result = []
     for item in data["data"]:
-        if item["url_name"].endswith("_set") and not prime or item["url_name"].endswith("prime_set"):
+        if (item["url_name"].endswith("_set") and filtering == "None"
+                or item["url_name"].endswith("prime_set") and filtering == "prime"
+                or item["url_name"].endswith("prime_set") and filtering == "warframe" and re.match(r"[a-zA-Z0-9 _]{2,"
+                                                                                                   r"20}",
+                                                                                                   item["item_name"])):
             result.append(item)
     return result
 
 
-async def search_price(data, query, prime=False):
+async def search_price(data, query, filtering="None"):
     if query == "all":
-        result = await search_set(data, prime)
+        result = await search_set(data, filtering)
     else:
         result = await search_query(data, query)
     print("Query done")
