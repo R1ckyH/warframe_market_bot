@@ -27,6 +27,7 @@ async def search_query(data, query, content="data"):
     if not result or content == "riven":
         return result
     first_item = result[0]["url_name"][:-3]
+    result = [result[0]]
     for item in data[content]:
         if item["url_name"].startswith(first_item) and item["url_name"][:-3] != first_item:
             result.append(item)
