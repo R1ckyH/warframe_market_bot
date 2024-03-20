@@ -148,6 +148,8 @@ async def get_prices(result, amount=1, riven=False):
         result = await asyncio.gather(*tasks)
     if amount != 1:
         result = result[0]
+    while None in result:
+        result.pop(result.index(None))
     return result
 
 

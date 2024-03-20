@@ -6,7 +6,7 @@ if __name__ == "__main__":
     async def main():
         import time
         s = time.time()
-        data = await search_price(await load_data(), "all", "warframe")
+        data = await search_price(await load_data(), "all", "prime")
         print(len(data))
         data = sorted(data, key=lambda i: i["platinum"], reverse=True)
         with open("data/price.txt", "w") as f:

@@ -1,5 +1,5 @@
 def format_item(data, simplify=False):
-    result = f"{data['url_name']} ({data['item_name']})"
+    result = f"{data['url_name'].ljust(25, ' ')} {('(' + data['item_name']+ ')').ljust(20, ' ')}"
     if simplify:
         result += f" price: {data['platinum']} p\n"
     else:

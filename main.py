@@ -32,6 +32,36 @@ async def riven(message, *, name: str):
 
 
 @bot.command()
+async def riven3(message, *, name: str):
+    if name == "":
+        return
+    try:
+        data = await load_data()
+        result = await search_riven_price(data, name, 3)
+        respond = format_query(result, riven=True)
+        if respond == "":
+            respond = "Nothing found"
+    except Exception as e:
+        respond = f"Error: {e}"
+    await message.send(respond)
+
+
+@bot.command()
+async def riven5(message, *, name: str):
+    if name == "":
+        return
+    try:
+        data = await load_data()
+        result = await search_riven_price(data, name, 5)
+        respond = format_query(result, riven=True)
+        if respond == "":
+            respond = "Nothing found"
+    except Exception as e:
+        respond = f"Error: {e}"
+    await message.send(respond)
+
+
+@bot.command()
 async def query(message, *, name: str):
     if name == "":
         return
